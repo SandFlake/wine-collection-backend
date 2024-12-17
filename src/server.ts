@@ -9,7 +9,7 @@ import winemakerRoutes from "./routes/winemakerRoutes";
 import wineBottleRoutes from "./routes/wineBottleRoutes";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(bodyParser.json());
