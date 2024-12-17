@@ -24,3 +24,11 @@ Create a `.env` file:
 
 - MONGO_URI=<your-mongodb-uri>
 - PORT=<your-port>
+
+## API Documentation
+
+This project uses **Swagger** to provide interactive API documentation for the Wine Collection Management API.
+
+1. Start the server
+2. Navigate to `http://localhost:3000/api-docs`
+

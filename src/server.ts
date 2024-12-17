@@ -7,6 +7,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import winemakerRoutes from "./routes/winemakerRoutes";
 import wineBottleRoutes from "./routes/wineBottleRoutes";
+import { setupSwagger } from "./utils/swagger";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -25,6 +26,9 @@ app.use("/winemakers", winemakerRoutes);
 app.use("/bottles", wineBottleRoutes);
 app.use('/uploads', express.static('uploads'));
 
+
+// Setup Swagger
+setupSwagger(app);
 
 // Connect to MongoDB Atlas
 const MONGO_URI = process.env.MONGO_URI as string;
