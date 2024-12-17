@@ -7,6 +7,7 @@ import {
   parseTastes,
   parseYears,
 } from "../utils/queryHelpers";
+import { Request, Response } from "express";
 
 const deleteWineBottle: RouteHandler = async (req, res) => {
   try {
@@ -116,10 +117,49 @@ const updateWineBottle: RouteHandler = async (req, res) => {
   }
 };
 
+const uploadWineBottleImage = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const bottleId = req.params.id;
+
+    // Ensure file was uploaded
+    if (!req.file) {
+      res.status(400).json({ error: "No image file uploaded." });
+      return;
+    }
+
+    // Find the wine bottle by ID
+    const wineBottle = await WineBottle.findById(bottleId);
+    if (!wineBottle) {
+      res.status(404).json({ error: "Wine bottle not found." });
+      return;
+    }
+
+    const imagePath = `uploads/${req.file.filename}`;
+    const imageURL = `${req.protocol}://${req.get("host")}/${imagePath}`;
+
+    // Update the wine bottle with image path and link
+    wineBottle.image = imagePath;
+    wineBottle.link = imageURL;
+
+    await wineBottle.save();
+
+    res.status(200).json({
+      message: "Image uploaded successfully to wine bottle.",
+      bottle: wineBottle,
+    });
+  } catch (error) {
+    handleErrors(res, error);
+  }
+};
+
 export {
+  deleteWineBottle,
   getWineBottles,
   getWineBottleById,
-  updateWineBottle,
   postWineBottle,
-  deleteWineBottle,
+  updateWineBottle,
+  uploadWineBottleImage,
 };

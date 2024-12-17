@@ -24,6 +24,8 @@ app.get("/health", (req, res) => {
 // Routes
 app.use("/winemakers", winemakerRoutes);
 app.use("/bottles", wineBottleRoutes);
+app.use('/uploads', express.static('uploads'));
+
 
 // Setup Swagger
 setupSwagger(app);
