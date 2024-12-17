@@ -21,5 +21,6 @@ A backend API to manage winemakers and wine bottles with filtering and MongoDB s
 ## Environment Variables
 
 Create a `.env` file:
-MONGO_URI=<your-mongodb-uri>
-PORT=<your-port>
+
+- MONGO_URI=<your-mongodb-uri>
+- PORT=<your-port>

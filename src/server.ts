@@ -23,6 +23,8 @@ app.get("/health", (req, res) => {
 // Routes
 app.use("/winemakers", winemakerRoutes);
 app.use("/bottles", wineBottleRoutes);
+app.use('/uploads', express.static('uploads'));
+
 
 // Connect to MongoDB Atlas
 const MONGO_URI = process.env.MONGO_URI as string;
